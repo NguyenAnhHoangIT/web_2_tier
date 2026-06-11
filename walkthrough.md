@@ -91,17 +91,19 @@ Here is a recording of the gameplay session and a snapshot of the retro Shop ove
 
 ## 5. Dockerization & Production Build
 
-We have containerized the unified 2-tier application for single-command production deployment:
-- **Dockerfile** ([Dockerfile](file:///d:/aws/web2tier/Dockerfile)): Runs the Node/Express server and serves the React/Vite assets dynamically on `PORT 3001`.
-- **Dockerignore** ([.dockerignore](file:///d:/aws/web2tier/.dockerignore)): Optimizes image contexts, excluding package directories and temporary logs.
-- **Docker Build script** ([package.json](file:///d:/aws/web2tier/package.json)): Added a helper script to compile the frontend locally and pack the Docker image:
+We have separated the application into two independent, lightweight Docker containers:
+- **Backend Dockerfile** ([Dockerfile](file:///d:/aws/web2tier/backend/Dockerfile)): Packs the Node/Express server to run as a standalone API on `PORT 3001`.
+- **Frontend Dockerfile** ([Dockerfile](file:///d:/aws/web2tier/frontend/Dockerfile)): Deploys an Nginx container serving static assets on `PORT 80`.
+- **Nginx Config** ([nginx.conf](file:///d:/aws/web2tier/frontend/nginx.conf)): Handles frontend static routing and reverse-proxies `/api/*` requests directly to `http://backend:3001`.
+- **Docker Build script** ([package.json](file:///d:/aws/web2tier/package.json)): Compile the frontend and build both containers:
   ```bash
   npm run docker:build
   ```
-- **Running the Container**:
-  To launch the containerized application on port 3001:
+- **Running Locally**:
+  To run the backend on 3001 and frontend on 80:
   ```bash
-  docker run -d -p 3001:3001 balatro-lite:latest
+  docker run -d --name backend -p 3001:3001 balatro-lite-backend:latest
+  docker run -d --name frontend -p 80:80 --link backend:backend balatro-lite-frontend:latest
   ```
 
 ---

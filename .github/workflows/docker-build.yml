@@ -48,9 +48,16 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Tag and Push Image to Docker Hub
+      - name: Tag and Push Images to Docker Hub
         run: |
-          docker tag balatro-lite:latest ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite:latest
-          docker tag balatro-lite:latest ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite:${{ github.sha }}
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite:latest
-          docker push ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite:${{ github.sha }}
+          # Tag and push Backend
+          docker tag balatro-lite-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-backend:latest
+          docker tag balatro-lite-backend:latest ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-backend:${{ github.sha }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-backend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-backend:${{ github.sha }}
+
+          # Tag and push Frontend
+          docker tag balatro-lite-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-frontend:latest
+          docker tag balatro-lite-frontend:latest ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-frontend:${{ github.sha }}
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-frontend:latest
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/balatro-lite-frontend:${{ github.sha }}

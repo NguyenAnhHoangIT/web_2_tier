@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import path from "path";
+import fs from "fs";
 import { fileURLToPath } from "url";
 import { createSession, getSession } from "./src/store.js";
 import { 
@@ -154,14 +155,16 @@ app.post("/api/game/:id/consumable/use", loadSession, (req, res) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Serve static assets from frontend build in production
+// Serve static assets from frontend build in production if they exist
 const distPath = path.join(__dirname, "../frontend/dist");
-app.use(express.static(distPath));
+if (fs.existsSync(distPath)) {
+  app.use(express.static(distPath));
 
-// Fallback to index.html for React SPA routing
-app.get("*", (req, res) => {
-  res.sendFile(path.join(distPath, "index.html"));
-});
+  // Fallback to index.html for React SPA routing
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+}
 
 // Start Express server
 app.listen(PORT, () => {

@@ -8,7 +8,7 @@
     "dev:backend": "npm run dev --prefix backend",
     "dev:frontend": "npm run dev --prefix frontend",
     "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "docker:build": "npm run build --prefix frontend && docker build -t balatro-lite:latest ."
+    "docker:build": "npm run build --prefix frontend && docker compose build"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
