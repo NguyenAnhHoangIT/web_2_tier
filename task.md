@@ -1,0 +1,32 @@
+# Tasks - Balatro-Lite Web App
+
+- [x] Setup root structure (`package.json`, `.gitignore`)
+- [ ] Implement Backend Component (Tier 2)
+  - [x] Create `backend/package.json` and initialize dependencies
+  - [x] Create `backend/src/hands.js` (Poker hand evaluator)
+  - [x] Create `backend/src/jokers.js` (Joker definitions & rules)
+  - [x] Create `backend/src/bosses.js` (Boss blind definitions)
+  - [x] Create `backend/src/scoring.js` (Scoring logic: hand scoring, card ranking, Joker evaluation)
+  - [x] Create `backend/src/shop.js` (Shop generation, buy, sell, reroll, interest)
+  - [x] Create `backend/src/store.js` (In-memory game state store)
+  - [x] Create `backend/src/game.js` (Game engine, card drawing, playing, discards, blind transitions)
+  - [x] Create `backend/server.js` (Express endpoints)
+- [ ] Implement Automated Tests for Backend
+  - [x] Create `backend/tests/hands.test.js`
+  - [x] Create `backend/tests/scoring.test.js`
+  - [x] Create `backend/tests/run.js` (Test runner)
+  - [x] Run and pass tests
+- [ ] Implement Frontend Component (Tier 1)
+  - [x] Initialize Vite + React project in `frontend` (Read `--help` options first)
+  - [x] Create `frontend/src/index.css` (CRT, scanline overlay, felt green styles, pixel typography)
+  - [x] Create `frontend/src/api.js` (API fetch wrappers)
+  - [ ] Create React components:
+    - [x] `Card.jsx` & `Hand.jsx`
+    - [x] `JokerSlots.jsx` & `ConsumableSlots.jsx`
+    - [x] `Sidebar.jsx` & `TopBar.jsx`
+    - [x] `Shop.jsx`
+    - [x] `ScoreAnimation.jsx`
+    - [x] `TitleScreen.jsx`
+  - [x] Update `frontend/src/App.jsx`
+- [x] Verification & Polish
+  - [x] Verify everything works end-to-end using the browser tool
