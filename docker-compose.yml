@@ -1,6 +1,7 @@
 services:
   app:
     container_name: balatro-lite
+    image: balatro-lite:latest
     build:
       context: .
       dockerfile: Dockerfile
