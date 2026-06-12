@@ -120,4 +120,17 @@ We have introduced multi-container orchestration support and CI/CD pipelines:
   1. **Relative Path Routing (Recommended)**: The frontend communicates via relative `/api` paths. In Kubernetes, you deploy an Ingress controller (or API Gateway) that maps `/api/*` traffic to the backend Service name (e.g. `http://backend-service:3001`), and all other paths to the frontend Service.
   2. **Dynamic API Endpoint Override**: The API client checks for `import.meta.env.VITE_API_URL` at build time, allowing you to inject a specific external DNS endpoint if needed.
 
+---
+
+## 7. Lab 2: Flask API Metrics Application
+
+We have implemented and verified the Python Flask API metrics application in the `app` subdirectory:
+- **Application Script** ([app.py](file:///d:/aws/web2tier/app/app.py)): Incorporates Prometheus metrics instrumentation, randomized error generation via `ERROR_RATE` configuration, and the `/healthz` check route.
+- **Dockerfile** ([Dockerfile](file:///d:/aws/web2tier/app/Dockerfile)): Formulates a lightweight `python:3.12-slim` configuration running on port 8080.
+- **Build and Deployment**:
+  - Successfully built the container image: `docker build -t w9-api:1 app/`
+  - Created the Minikube profile `w9`: `minikube start -p w9 --driver=docker`
+  - Loaded the image into the cluster: `minikube image load w9-api:1 -p w9`
+  - Verified image registration: `minikube image ls -p w9` which lists `docker.io/library/w9-api:1`.
+
 
